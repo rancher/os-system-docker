@@ -1,2 +1,4 @@
 .helpers/
 dist/
+components/
+/.dapper

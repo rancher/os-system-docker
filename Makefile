@@ -14,14 +14,24 @@ test-integration-cli: $(CLI_DIR)/build/docker ## test integration of cli and eng
 $(CLI_DIR)/build/docker:
 	$(MAKE) -C $(CLI_DIR) -f docker.Makefile build
 
+.PHONY: prepare
+release: prepare
+	VERSION=$(VERSION) ./scripts/prepare
+
 .PHONY: static
-static: ## build static packages
+static: prepare ## build static packages
 	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) static
-	mkdir $(CURDIR)/dist
 	cp -r components/packaging/static/build/* ${CURDIR}/dist/
+
+
+.PHONY: release
+release: static
+	VERSION=$(VERSION) ./scripts/release
 
 .PHONY: clean
 clean: ## clean the build artifacts
 	-$(MAKE) -C $(CLI_DIR) clean
 	-$(MAKE) -C $(ENGINE_DIR) clean
 	-$(MAKE) -C $(PACKAGING_DIR) clean
+	rm -rf dist
+	rm -rf components
