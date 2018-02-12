@@ -18,7 +18,7 @@ if [ -z "$CLI_VERSION" ] || [ -z "$ENGINE_VERSION" ] || [ -z "$PACKAGING_VERSION
 fi
 
 CLI_REPO=${CLI_REPO:-"https://github.com/niusmallnan/cli"}
-ENGINE_REPO=${CLI_REPO:-"https://github.com/niusmallnan/moby"}
+ENGINE_REPO=${ENGINE_REPO:-"https://github.com/niusmallnan/moby"}
 PACKAGING_REPO=${PACKAGING_REPO:-"https://github.com/niusmallnan/docker-ce-packaging"}
 
 prepare_component cli ${CLI_REPO}/archive/${CLI_VERSION}.tar.gz
