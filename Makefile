@@ -15,17 +15,16 @@ $(CLI_DIR)/build/docker:
 	$(MAKE) -C $(CLI_DIR) -f docker.Makefile build
 
 .PHONY: prepare
-prepare:
+prepare: ## prepare the components
 	VERSION=$(VERSION) ./scripts/prepare
 
 .PHONY: static
-static: prepare ## build static packages
-	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) static
-	cp -r components/packaging/static/build/* ${CURDIR}/dist/
-
+static:  ## build static packages
+	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) static-linux
+	cp -r components/packaging/static/build/* $(CURDIR)/dist/
 
 .PHONY: release
-release: static
+release: static ## release
 	VERSION=$(VERSION) ./scripts/release
 
 .PHONY: clean
