@@ -15,7 +15,7 @@ $(CLI_DIR)/build/docker:
 	$(MAKE) -C $(CLI_DIR) -f docker.Makefile build
 
 .PHONY: prepare
-release: prepare
+prepare:
 	VERSION=$(VERSION) ./scripts/prepare
 
 .PHONY: static
