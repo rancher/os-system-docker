@@ -20,7 +20,7 @@ prepare: ## prepare the components
 
 .PHONY: static
 static:  ## build static packages
-	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) static-linux
+	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) ros-static
 	mkdir -p $(CURDIR)/dist/
 	cp -r components/packaging/static/build/* $(CURDIR)/dist/
 
