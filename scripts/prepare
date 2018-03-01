@@ -3,26 +3,34 @@ set -e
 
 cd $(dirname $0)/..
 
-prepare_component() {
-    local name=$1
-    local url=$2
+TEMP_SOURCE_DIR=.tmp
 
-    mkdir -p components/$name
-    rm -rf components/$name/*
-    curl -SL $url | tar --strip-components=1 -xzvf - -C components/$name
-}
+trash -k -T ${TEMP_SOURCE_DIR}
+mkdir -p ./components
+mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/cli components/
+mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/moby components/engine
+mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/docker-ce-packaging components/packaging
 
-if [ -z "$CLI_VERSION" ] || [ -z "$ENGINE_VERSION" ] || [ -z "$PACKAGING_VERSION" ]; then
-    echo CLI_VERSION and ENGINE_VERSION and PACKAGING_VERSION must be set
-    exit 1
-fi
+#prepare_component() {
+    #local name=$1
+    #local url=$2
 
-CLI_REPO=${CLI_REPO:-"https://github.com/niusmallnan/cli"}
-ENGINE_REPO=${ENGINE_REPO:-"https://github.com/niusmallnan/moby"}
-PACKAGING_REPO=${PACKAGING_REPO:-"https://github.com/niusmallnan/docker-ce-packaging"}
+    #mkdir -p components/$name
+    #rm -rf components/$name/*
+    #curl -SL $url | tar --strip-components=1 -xzvf - -C components/$name
+#}
 
-prepare_component cli ${CLI_REPO}/archive/${CLI_VERSION}.tar.gz
-prepare_component engine ${ENGINE_REPO}/archive/${ENGINE_VERSION}.tar.gz
-prepare_component packaging ${PACKAGING_REPO}/archive/${PACKAGING_VERSION}.tar.gz
+#if [ -z "$CLI_VERSION" ] || [ -z "$ENGINE_VERSION" ] || [ -z "$PACKAGING_VERSION" ]; then
+    #echo CLI_VERSION and ENGINE_VERSION and PACKAGING_VERSION must be set
+    #exit 1
+#fi
 
-cp VERSION components/cli/
+#CLI_REPO=${CLI_REPO:-"https://github.com/niusmallnan/cli"}
+#ENGINE_REPO=${ENGINE_REPO:-"https://github.com/niusmallnan/moby"}
+#PACKAGING_REPO=${PACKAGING_REPO:-"https://github.com/niusmallnan/docker-ce-packaging"}
+
+#prepare_component cli ${CLI_REPO}/archive/${CLI_VERSION}.tar.gz
+#prepare_component engine ${ENGINE_REPO}/archive/${ENGINE_VERSION}.tar.gz
+#prepare_component packaging ${PACKAGING_REPO}/archive/${PACKAGING_VERSION}.tar.gz
+
+#cp VERSION components/cli/
