@@ -11,6 +11,9 @@ mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/cli components/
 mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/moby components/engine
 mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/docker-ce-packaging components/packaging
 
+cp VERSION components/cli/
+cp VERSION components/engine/
+
 #prepare_component() {
     #local name=$1
     #local url=$2
