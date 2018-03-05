@@ -2,6 +2,7 @@ CLI_DIR:=$(CURDIR)/components/cli
 ENGINE_DIR:=$(CURDIR)/components/engine
 PACKAGING_DIR:=$(CURDIR)/components/packaging
 VERSION=$(shell cat VERSION)
+ARCH:=$(shell $(CURDIR)/detect_arch)
 
 .PHONY: help
 help: ## show make targets
@@ -13,7 +14,7 @@ prepare: ## prepare the components
 
 .PHONY: static
 static:  ## build static packages
-	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) ros-static
+	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) ros-static-$(ARCH)
 	mkdir -p $(CURDIR)/dist/
 	cp -r components/packaging/static/build/* $(CURDIR)/dist/
 
