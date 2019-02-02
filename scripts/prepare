@@ -7,9 +7,9 @@ TEMP_SOURCE_DIR=.tmp
 
 trash -k -T ${TEMP_SOURCE_DIR}
 mkdir -p ./components
-mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/cli components/
-mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/moby components/engine
-mv ${TEMP_SOURCE_DIR}/github.com/niusmallnan/docker-ce-packaging components/packaging
+mv ${TEMP_SOURCE_DIR}/github.com/rancher/docker-cli components/cli
+mv ${TEMP_SOURCE_DIR}/github.com/rancher/docker components/engine
+mv ${TEMP_SOURCE_DIR}/github.com/rancher/docker-ce-packaging components/packaging
 
 cp VERSION components/cli/
 cp VERSION components/engine/
